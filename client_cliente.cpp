@@ -29,7 +29,7 @@ void Client::translateAction(int action) {
         protocol.send_msg_attack();
     } else {
         uint8_t  type_event = 0;
-        int alive_count = 0;
+        int alive_count;
         for (int i = 0; i < action; ++i) {
             alive_count = protocol.receive_msg(type_event);
             printer.printStatus(type_event, alive_count);
