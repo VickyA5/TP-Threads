@@ -13,7 +13,7 @@ void Client::run() {
     while (std::getline(std::cin, line, '\n')) {
         if (line == SALIR) {
             //cerrar conexion
-            break;
+            return;
         }
         //No se si haga falta chequear linea vacia para los tests privados
         action = parser.parsing(line);

@@ -8,6 +8,6 @@ void StatusPrinter::printStatus(uint8_t type_event, int aliveCount) {
     } else if (type_event == REVIVED) {
         std::cout << "Un enemigo ha revivido. " << aliveCount << " vivo(s) y " << deadCount << " muerto(s)." << std::endl;
     } else {
-        std::cout << "Evento no reconocido." << std::endl;
+        std::cout << "No hubo ningun evento todavia." << std::endl;
     }
 }
