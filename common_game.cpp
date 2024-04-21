@@ -28,13 +28,11 @@ void Game::reviveEnemy() {
     std::cout << "Todos los enemigos ya están vivos." << std::endl;
 }
 
-std::array<int, 2> Game::getState() const {
-    int alive = 0, dead = 0;
+int Game::getAliveNumber() const {
+    int alive;
     for (bool enemy : enemies) {
         if (enemy)
             alive++;
-        else
-            dead++;
     }
-    return {alive, dead};
+    return alive;
 }

@@ -26,7 +26,7 @@ public:
      * Devuelve el estado del juego, donde la primera posición del array representa
      * al número de enemigos vivos y la segunda a la cantidad de muertos.
      * */
-    std::array<int, 2> getState() const;
+    int getAliveNumber() const;
 
 };
 

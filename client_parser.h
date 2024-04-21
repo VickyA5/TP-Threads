@@ -6,14 +6,18 @@
 #include <iostream>
 #include <sstream>
 
-#define ATACAR "Atacar"
-#define SALIR "Salir"
+#define ATACAR 0
+#define LEER "Leer"
 
 class ClientParser {
 
 public:
-    bool keepParsing();
-    void parsing(std::string linea);
+    //bool keepParsing();
+
+    /*
+     * Returns 0 if action is Atacar, n if action is Leer <n>, and -1 if action is invalid.
+     * */
+    int parsing(std::string linea);
 };
 
 

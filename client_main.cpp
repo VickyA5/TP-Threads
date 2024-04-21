@@ -1,7 +1,7 @@
 
 #include <iostream>
 #include "client_cliente.h"
-#define ERROR -1
+#define ERROR (-1)
 
 int main(int argc, const char* argv[]) {
     try {
