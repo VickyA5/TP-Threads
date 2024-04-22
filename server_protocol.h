@@ -2,10 +2,11 @@
 #ifndef THREADS_2024C1_VICKYA5_SERVER_PROTOCOL_H
 #define THREADS_2024C1_VICKYA5_SERVER_PROTOCOL_H
 
-#include "common_socket.h"
 #include <iostream>
-#include "common_game.h"
+
+#include "common_socket.h"
 #include "common_status_printer.h"
+#include "server_monitor_game.h"
 
 #define HEADER_SERVER 0x06
 #define ATTACK 0x03
