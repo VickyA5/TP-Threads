@@ -5,29 +5,27 @@
 #include <iostream>
 
 #include "common_socket.h"
-#include "common_status_printer.h"
 #include "server_monitor_game.h"
 
 #define HEADER_SERVER 0x06
-#define ATTACK 0x03
 
 class ServerProtocol {
 
 private:
-    Socket skt;
+    Socket& skt;
 
 public:
-    explicit ServerProtocol(const char* service_name);
+    explicit ServerProtocol(Socket& a_skt);
 
     /*
      *
      * */
-    void receive_msg(Game & game, bool * connected);
+    uint8_t receive_msg(GameMonitor & game);
 
     /*
      *
      * */
-    void send_status(Game & game);
+    void send_status(GameMonitor & game);
 };
 
 
