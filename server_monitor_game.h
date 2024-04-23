@@ -5,13 +5,14 @@
 #include <array>
 #include <iostream>
 #include "server_queue.h"
+#include "server_enemy.h"
 
 #define KILLED 0x04
 #define REVIVED 0x05
 
 class GameMonitor {
 private:
-    std::array<bool, 5> enemies;
+    std::array<Enemy, 5> enemies;
     uint8_t last_type_event;
     std::mutex game_mutex;
 

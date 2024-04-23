@@ -9,7 +9,7 @@ void AcceptorThread::run() {
         GameMonitor game;
         while (still_alive) {
             Socket new_client = listener_skt.accept();
-            // crear una queue y una map de queues donde la agrego para desp pasarselo
+            // crear una queue y una clase map de queues donde la agrego para desp pasarselo
             // a PlayerThread
             PlayerThread* new_thread = new PlayerThread(std::move(new_client));
             clients.push_back(new_thread);

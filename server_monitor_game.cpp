@@ -1,7 +1,7 @@
 
 #include "server_monitor_game.h"
 
-GameMonitor::GameMonitor() : enemies({true, true, true, true, true}) {
+GameMonitor::GameMonitor() {
     this->last_type_event = -1;
 }
 
@@ -9,9 +9,9 @@ GameMonitor::GameMonitor() : enemies({true, true, true, true, true}) {
 void GameMonitor::kill_enemy() {
     std::lock_guard<std::mutex> lck(game_mutex);
     this->last_type_event = KILLED;
-    for (bool& enemy : enemies) {
-        if (enemy) {
-            enemy = false;
+    for (Enemy& enemy : enemies) {
+        bool was_killed = enemy.kill();
+        if (was_killed) {
             return;
         }
     }
@@ -20,11 +20,9 @@ void GameMonitor::kill_enemy() {
 void GameMonitor::revive_enemy() {
     std::lock_guard<std::mutex> lck(game_mutex);
     this->last_type_event = REVIVED;
-    for (bool& enemy : enemies) {
-        if (!enemy) {
-            enemy = true;
-            return;
-        }
+    for (Enemy& enemy : enemies) {
+        // Todos los enemigos deben enterarse que sucedió una iteración, y si corresponde reviven.
+        enemy.try_revive();
     }
 }
 
@@ -32,8 +30,8 @@ int GameMonitor::get_alive_cnt()  {
     //Realmente hace falta bloquear aca?
     std::lock_guard<std::mutex> lck(game_mutex);
     int alive = 0;
-    for (bool enemy : enemies) {
-        if (enemy)
+    for (Enemy& enemy : enemies) {
+        if (enemy.is_alive())
             alive++;
     }
     return alive;
