@@ -2,7 +2,6 @@
 #include <exception>
 #include <iostream>
 #include "server_servidor.h"
-#include "server_parser.h"
 
 #define ERROR (-1)
 
@@ -11,10 +10,9 @@ int main(int argc, char* argv[]) {
         int ret = ERROR;
         if (argc == 2) {
             Server server(argv[1]);
-            ServerParser serverParser;
-            ret = serverParser.run(server);
+            ret = server.run();
         } else {
-            std::cerr << "Invalid arguments, must be entered " << argv[0]
+            std::cerr << "Invalid arguments, it must be entered " << argv[0]
                       << " <hostname> <servername> \n";
             return ret;
         }
