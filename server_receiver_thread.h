@@ -5,10 +5,12 @@
 #include "server_thread.h"
 #include "common_socket.h"
 #include "server_protocol.h"
+#include "server_queue.h"
 
 class ReceiverThread : public Thread {
 private:
     Socket& client_skt;
+
 
 public:
     explicit ReceiverThread(Socket& skt);

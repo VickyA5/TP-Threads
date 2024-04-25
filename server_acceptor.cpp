@@ -1,6 +1,8 @@
 
 #include "server_acceptor.h"
 #include "common_status_printer.h"
+#include "server_queue.h"
+#include "common_map_queues.h"
 
 AcceptorThread::AcceptorThread(Socket& skt) :
         listener_skt(skt) {}
@@ -9,16 +11,15 @@ void AcceptorThread::run() {
     try {
         GameMonitor game;
         while (still_alive) {
-            // EL sleep sería acá?
+            // Las iteraciones las simulo acá?
             std::this_thread::sleep_for(std::chrono::milliseconds(200));
-            game.revive_enemy();
+            game.iteration();
             Socket new_client = listener_skt.accept();
-            // crear una queue y una clase map de queues donde la agrego para desp pasarselo
-            // a PlayerThread
+            // Me falta que cada playerThread, y luego cada receiver y sender conozcan al game
+            // pero no sé cómo pasarlo
             PlayerThread* new_thread = new PlayerThread(std::move(new_client));
             clients.push_back(new_thread);
             new_thread->start();
-            //broadcast.printStatus();
             clean_clients();
         }
     } catch (const std::exception& err) {

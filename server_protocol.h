@@ -20,7 +20,7 @@ public:
     /*
      *
      * */
-    uint8_t receive_msg(GameMonitor & game);
+    uint8_t receive_msg();
 
     /*
      *

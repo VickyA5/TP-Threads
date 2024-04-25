@@ -23,7 +23,6 @@ void Client::run() {
 
 void Client::translateAction(int action) {
     if (action == INVALID_ACTION) {
-        //FIJARME SI LOS THROW NO MOLESTAN
         throw std::runtime_error("Error: an invalid action was received");
     } else if (action == ATACAR) {
         protocol.send_msg_attack();

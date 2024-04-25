@@ -4,13 +4,14 @@
 
 ServerProtocol::ServerProtocol(Socket& a_skt) : skt(a_skt) {}
 
-uint8_t ServerProtocol::receive_msg(GameMonitor & game) {
+uint8_t ServerProtocol::receive_msg() {
     bool was_closed = false;
     uint8_t msg = 0;
     skt.recvall(&msg, sizeof(uint8_t), &was_closed);
     return msg;
 }
 
+//Deberia recibir como parametro al map de queues
 void ServerProtocol::send_status(GameMonitor& game) {
     bool was_closed = false;
     uint8_t header_server = HEADER_SERVER;
