@@ -9,11 +9,8 @@ AcceptorThread::AcceptorThread(Socket& skt) :
 
 void AcceptorThread::run() {
     try {
-        GameMonitor game;
         while (still_alive) {
-            // Las iteraciones las simulo acá?
-            std::this_thread::sleep_for(std::chrono::milliseconds(200));
-            game.iteration();
+
             Socket new_client = listener_skt.accept();
             // Me falta que cada playerThread, y luego cada receiver y sender conozcan al game
             // pero no sé cómo pasarlo

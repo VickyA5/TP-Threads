@@ -30,15 +30,9 @@ private:
     void revive_enemy();
 
     /*
-     * Devuelve el estado del juego, donde la primera posición del array representa
-     * al número de enemigos vivos y la segunda a la cantidad de muertos.
-     * */
-    int get_alive_cnt();
-
-    /*
      *
      * */
-    uint8_t get_last_type_event();
+    int get_alive_cnt();
 
 public:
 
@@ -46,6 +40,11 @@ public:
      *
      * */
     void iteration();
+
+    /*
+     *
+     * */
+    void broadcast();
 
 };
 

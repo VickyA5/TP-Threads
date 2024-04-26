@@ -25,7 +25,7 @@ public:
     /*
      *
      * */
-    void send_status(GameMonitor & game);
+    void send_status(int alive_cnt, uint8_t last_type_event);
 };
 
 

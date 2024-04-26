@@ -6,6 +6,7 @@
 #include "common_socket.h"
 #include "server_acceptor.h"
 #include "server_monitor_game.h"
+#include "server_gameloop_thread.h"
 
 #define EXIT 'q'
 

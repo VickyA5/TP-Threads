@@ -14,3 +14,7 @@ uint8_t MapQueues::pop_clients_commands() {
     // o quizas try_pop
     return clients_commands.pop();
 }
+
+void MapQueues::broadcast(int alive_cnt, uint8_t last_type_event) {
+    //enviarle el mensaje a todos los clientes activos
+}

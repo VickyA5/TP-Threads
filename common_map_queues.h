@@ -30,8 +30,15 @@ public:
      * */
     void push_attack_to_clients_queue();
 
+    /*
+     *
+     * */
     uint8_t pop_clients_commands();
 
+    /*
+     *
+     * */
+    void broadcast(int alive_cnt, uint8_t last_type_event);
 };
 
 
