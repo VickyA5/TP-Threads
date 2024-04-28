@@ -8,11 +8,12 @@
 
 class Gameloop : public Thread {
 private:
-    GameMonitor game;
-    ServerProtocol protocol;
+    GameMonitor& game;
     std::atomic<bool> continue_loop{true};
 
 public:
+
+    explicit Gameloop(GameMonitor& the_game);
 
     /*
      *

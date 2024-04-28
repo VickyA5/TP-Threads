@@ -13,8 +13,7 @@
 class Server {
 private:
     Socket acceptor_skt;
-    GameMonitor game;
-    //ServerProtocol protocol;
+
 public:
     explicit Server(const char* service_name);
     int run();

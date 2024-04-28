@@ -1,5 +1,5 @@
 
-#include "common_map_queues.h"
+#include "server_map_queues.h"
 
 MapQueues::MapQueues() {}
 

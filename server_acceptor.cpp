@@ -1,8 +1,9 @@
 
 #include "server_acceptor.h"
+
 #include "common_status_printer.h"
+#include "server_map_queues.h"
 #include "server_queue.h"
-#include "common_map_queues.h"
 
 AcceptorThread::AcceptorThread(Socket& skt) :
         listener_skt(skt) {}
@@ -12,8 +13,6 @@ void AcceptorThread::run() {
         while (still_alive) {
 
             Socket new_client = listener_skt.accept();
-            // Me falta que cada playerThread, y luego cada receiver y sender conozcan al game
-            // pero no sé cómo pasarlo
             PlayerThread* new_thread = new PlayerThread(std::move(new_client));
             clients.push_back(new_thread);
             new_thread->start();

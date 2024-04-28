@@ -4,9 +4,9 @@
 
 #include <array>
 #include <iostream>
-#include "server_queue.h"
 #include "server_enemy.h"
-#include "common_map_queues.h"
+#include "server_map_queues.h"
+#include "server_queue.h"
 
 #define ATTACK 0x03
 #define KILLED 0x04
@@ -35,6 +35,7 @@ private:
     int get_alive_cnt();
 
 public:
+    GameMonitor();
 
     /*
      *

@@ -1,6 +1,10 @@
 
 #include "server_monitor_game.h"
 
+GameMonitor::GameMonitor() {
+    this->last_type_event = 0;
+}
+
 // fijarme si no hay problema con tener problema con la posición de memoria si se me mueve.
 void GameMonitor::kill_enemy() {
     std::lock_guard<std::mutex> lck(game_mutex);
@@ -33,7 +37,6 @@ int GameMonitor::get_alive_cnt()  {
     return alive;
 }
 
-
 void GameMonitor::iteration() {
     uint8_t last_command = map_queues.pop_clients_commands();
     if (last_command == ATTACK)
@@ -42,6 +45,7 @@ void GameMonitor::iteration() {
 }
 
 void GameMonitor::broadcast() {
-    int alive_cnt = 0;
+    int alive_cnt = get_alive_cnt();
     map_queues.broadcast(alive_cnt, last_type_event);
 }
+
