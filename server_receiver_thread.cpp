@@ -3,7 +3,8 @@
 
 #define ATTACK 0x03
 
-ReceiverThread::ReceiverThread(Socket& skt) : client_skt(skt) {}
+ReceiverThread::ReceiverThread(Socket& skt, GameMonitor& the_game) : client_skt(skt),
+        game(the_game) {}
 
 
 void ReceiverThread::run() {
@@ -12,6 +13,7 @@ void ReceiverThread::run() {
     msg = protocol.receive_msg();
     if (msg == ATTACK) {
         //map_queues.push_attack_to_clients_queue();
+        game.push_attack_to_queue();
     } else {
         throw std::runtime_error("The message sent from the client wasn't the expected.");
     }

@@ -20,12 +20,12 @@ private:
     MapQueues map_queues;
 
     /*
-     * Asesina a un enemigo. Si todos se encontraban muertos, no pasa nada.
+     * Kills an enemy. If all of them were already dead, nothing happens.
      * */
     void kill_enemy();
 
     /*
-     * Revive a un enemigo. Si todos se encontraban vivos, no pasa nada.
+     * Revives an enemy. If all of them were already alive, nothing happens.
      * */
     void revive_enemy();
 
@@ -46,6 +46,16 @@ public:
      *
      * */
     void broadcast();
+
+    /*
+     *
+     * */
+    void push_attack_to_queue();
+
+    /*
+     *
+     * */
+    void push_server_msg();
 
 };
 

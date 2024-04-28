@@ -10,10 +10,11 @@
 class ReceiverThread : public Thread {
 private:
     Socket& client_skt;
+    GameMonitor& game;
 
 
 public:
-    explicit ReceiverThread(Socket& skt);
+    ReceiverThread(Socket& skt, GameMonitor& the_game);
 
     /*
      *

@@ -1,14 +1,14 @@
 
 #include "server_servidor.h"
+#include "server_map_queues.h"
 
 Server::Server(const char* service_name) : acceptor_skt(service_name) {
 }
 
 int Server::run(){
 
-
     GameMonitor game;
-    AcceptorThread acceptor(acceptor_skt);
+    AcceptorThread acceptor(acceptor_skt, game);
     acceptor.start();
     Gameloop gameloop(game);
     gameloop.start();

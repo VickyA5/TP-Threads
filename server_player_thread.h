@@ -12,10 +12,11 @@ class PlayerThread : public Thread {
 private:
     Socket peer;
     std::atomic<bool> still_alive{true};
+    GameMonitor& game;
 
 public:
 
-    explicit PlayerThread(Socket skt_peer);
+    PlayerThread(Socket skt_peer, GameMonitor& the_game);
 
     /*
      *

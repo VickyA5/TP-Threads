@@ -5,15 +5,14 @@
 #include "server_map_queues.h"
 #include "server_queue.h"
 
-AcceptorThread::AcceptorThread(Socket& skt) :
-        listener_skt(skt) {}
+AcceptorThread::AcceptorThread(Socket& skt, GameMonitor& the_game) :
+        listener_skt(skt), game(the_game) {}
 
 void AcceptorThread::run() {
     try {
         while (still_alive) {
-
             Socket new_client = listener_skt.accept();
-            PlayerThread* new_thread = new PlayerThread(std::move(new_client));
+            PlayerThread* new_thread = new PlayerThread(std::move(new_client), game);
             clients.push_back(new_thread);
             new_thread->start();
             clean_clients();

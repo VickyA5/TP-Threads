@@ -8,9 +8,10 @@
 class SenderThread : public Thread {
 private:
     Socket& client_skt;
+    GameMonitor& game;
 
 public:
-    explicit SenderThread(Socket& skt);
+    SenderThread(Socket& skt, GameMonitor& the_game);
 
     /*
      *

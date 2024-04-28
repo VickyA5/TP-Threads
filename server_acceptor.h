@@ -16,9 +16,10 @@ private:
     Socket& listener_skt;
     std::list<PlayerThread*> clients;
     std::atomic<bool> still_alive{true};
+    GameMonitor& game;
 
 public:
-    explicit AcceptorThread(Socket& skt);
+     AcceptorThread(Socket& skt, GameMonitor& the_game);
 
     /*
      *

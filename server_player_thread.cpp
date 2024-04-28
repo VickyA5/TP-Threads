@@ -2,14 +2,14 @@
 #include "server_player_thread.h"
 
 
-PlayerThread::PlayerThread(Socket skt_peer) :
-        peer(std::move(skt_peer)) {
+PlayerThread::PlayerThread(Socket skt_peer, GameMonitor& the_game) :
+        peer(std::move(skt_peer)), game(the_game) {
 }
 
 void PlayerThread::run() {
-    ReceiverThread receiver(peer);
+    ReceiverThread receiver(peer, game);
     receiver.start();
-    SenderThread sender(peer);
+    SenderThread sender(peer, game);
     sender.start();
     receiver.join();
     sender.join();

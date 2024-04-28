@@ -11,9 +11,7 @@
 
 class MapQueues {
 private:
-    // Por ahora haré que los mensajes del server se encolen así, luego haré un tipo de dato para
-    // encapsularlo.
-    std::map<size_t, Queue<std::array<uint16_t, 4>>*> server_messages;
+    std::map<size_t, Queue<std::array<uint8_t, 2>>*> server_messages;
     Queue<uint8_t> clients_commands;
     std::mutex mtx;
 
@@ -34,6 +32,11 @@ public:
      *
      * */
     uint8_t pop_clients_commands();
+
+    /*
+     *
+     * */
+    void push_server_message();
 
     /*
      *

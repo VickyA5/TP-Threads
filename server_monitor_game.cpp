@@ -49,3 +49,6 @@ void GameMonitor::broadcast() {
     map_queues.broadcast(alive_cnt, last_type_event);
 }
 
+void GameMonitor::push_attack_to_queue() {
+    map_queues.push_attack_to_clients_queue();
+}
