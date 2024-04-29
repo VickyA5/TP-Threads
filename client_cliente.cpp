@@ -10,28 +10,30 @@ Client::Client(const char* host_name, const char* service_name) :
 void Client::run() {
     std::string line;
     int action;
+    bool read = false;
     while (std::getline(std::cin, line, '\n')) {
         if (line == SALIR) {
             //cerrar conexion
             return;
         }
-        //No se si haga falta chequear linea vacia para los tests privados
-        action = parser.parsing(line);
-        translateAction(action);
+        if (!line.empty()) {
+            action = parser.parsing(line, read);
+            translateAction(action, read);
+        }
     }
 }
 
-void Client::translateAction(int action) {
+void Client::translateAction(int action, bool read) {
     if (action == INVALID_ACTION) {
         throw std::runtime_error("Error: an invalid action was received");
-    } else if (action == ATACAR) {
+    } else if (action == ATACAR && !read) {
         protocol.send_msg_attack();
     } else {
         uint8_t  type_event = 0;
         int alive_count;
         for (int i = 0; i < action; ++i) {
             alive_count = protocol.receive_msg(type_event);
-            printer.printStatus(type_event, alive_count);
+            printer.print_status(type_event, alive_count);
         }
     }
 }

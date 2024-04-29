@@ -15,7 +15,7 @@ private:
     ClientProtocol protocol;
     StatusPrinter printer;
 
-    void translateAction(int action);
+    void translateAction(int action, bool read);
 
 public:
     Client(const char* host_name, const char* service_name);

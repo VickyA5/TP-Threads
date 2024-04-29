@@ -13,6 +13,7 @@ class ClientProtocol {
 
 private:
     Socket socket;
+    bool was_closed;
 public:
     ClientProtocol(const char* host_name, const char* service_name);
 

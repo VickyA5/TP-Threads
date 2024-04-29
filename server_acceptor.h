@@ -18,6 +18,16 @@ private:
     std::atomic<bool> still_alive{true};
     GameMonitor& game;
 
+    /*
+     *
+     * */
+    void clean_clients();
+
+    /*
+     *
+     * */
+    void kill_all_clients();
+
 public:
      AcceptorThread(Socket& skt, GameMonitor& the_game);
 
@@ -29,12 +39,7 @@ public:
     /*
      *
      * */
-    void clean_clients();
-
-    /*
-     *
-     * */
-    void kill_all_clients();
+    void stop_acceptor();
 
     /*
      *

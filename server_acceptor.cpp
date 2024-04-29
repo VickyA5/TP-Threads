@@ -49,3 +49,7 @@ void AcceptorThread::kill_all_clients() {
     }
     clients.clear();
 }
+
+void AcceptorThread::stop_acceptor() {
+    this->still_alive = false;
+}

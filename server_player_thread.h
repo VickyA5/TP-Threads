@@ -8,6 +8,8 @@
 #include "server_monitor_game.h"
 #include "server_queue.h"
 
+#define SHUTDOWN 2
+
 class PlayerThread : public Thread {
 private:
     Socket peer;

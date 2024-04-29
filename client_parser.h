@@ -17,7 +17,7 @@ public:
     /*
      * Returns 0 if action is Atacar, n if action is Leer <n>, and -1 if action is invalid.
      * */
-    int parsing(std::string linea);
+    int parsing(std::string linea, bool& read);
 };
 
 

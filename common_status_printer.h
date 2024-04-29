@@ -11,7 +11,7 @@
 class StatusPrinter {
 
 public:
-    void printStatus(uint8_t type_event, int aliveCount);
+    void print_status(uint8_t type_event, int aliveCount);
 };
 
 

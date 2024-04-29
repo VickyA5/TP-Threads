@@ -17,7 +17,7 @@ void PlayerThread::run() {
 
 void PlayerThread::kill() {
     still_alive = false;
-    peer.shutdown(2);
+    peer.shutdown(SHUTDOWN);
     peer.close();
 }
 

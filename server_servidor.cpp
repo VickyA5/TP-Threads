@@ -13,6 +13,7 @@ int Server::run(){
     Gameloop gameloop(game);
     gameloop.start();
     while (std::cin.get() != EXIT) {}
+    acceptor.stop_acceptor();
     gameloop.stop_loop();
     acceptor_skt.shutdown(2);
     acceptor_skt.close();
