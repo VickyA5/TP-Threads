@@ -7,10 +7,11 @@
 #include <map>
 #include <mutex>
 #include "server_queue.h"
+#include "server_message.h"
 
 class MapQueues {
 private:
-    std::map<size_t, Queue<std::array<uint8_t, 2>>*> server_messages;
+    std::map<size_t, Queue<ServerMessage>*> server_messages;
     std::mutex mtx;
 
 public:
@@ -18,8 +19,9 @@ public:
 
     /*
      *
+     * void add_new_queue(const size_t& idThrClient, Queue<std::array<uint16_t, 4>>* a_queue);
      * */
-    void add_new_queue(const size_t& idThrClient, Queue<std::array<uint16_t, 4>>* a_queue);
+    void add_new_queue(Queue<ServerMessage>* a_queue);
 
     /*
      *
