@@ -27,12 +27,17 @@ private:
     /*
      * Revives an enemy. If all of them were already alive, nothing happens.
      * */
-    void revive_enemy();
+    bool revive_enemy();
 
     /*
      *
      * */
     int get_alive_cnt();
+
+    /*
+     *
+     * */
+    void broadcast();
 
 public:
     Game();
@@ -42,15 +47,6 @@ public:
      * */
     void iteration();
 
-    /*
-     *
-     * */
-    void broadcast();
-
-    /*
-     *
-     * */
-    void push_attack_to_queue();
 
     /*
      *

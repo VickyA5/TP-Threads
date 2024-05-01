@@ -16,12 +16,14 @@ void Game::kill_enemy() {
     }
 }
 
-void Game::revive_enemy() {
+bool Game::revive_enemy() {
     this->last_type_event = REVIVED;
+    bool an_enemy_was_revived = false;
     for (Enemy& enemy : enemies) {
         // Todos los enemigos deben enterarse que sucedió una iteración, y si corresponde reviven.
-        enemy.try_revive();
+        an_enemy_was_revived = enemy.try_revive();
     }
+    return an_enemy_was_revived;
 }
 
 int Game::get_alive_cnt()  {
@@ -34,19 +36,19 @@ int Game::get_alive_cnt()  {
 }
 
 void Game::iteration() {
-    uint8_t last_command = map_queues.pop_clients_commands();
-    if (last_command == ATTACK)
+    uint8_t last_command = clients_commands.pop();
+    if (last_command == ATTACK) {
         kill_enemy();
-    revive_enemy();
+        broadcast();
+    }
+    bool an_enemy_was_revived = revive_enemy();
+    if (an_enemy_was_revived)
+        broadcast();
 }
 
 void Game::broadcast() {
     int alive_cnt = get_alive_cnt();
     map_queues.broadcast(alive_cnt, last_type_event);
-}
-
-void Game::push_attack_to_queue() {
-    map_queues.push_attack_to_clients_queue();
 }
 
 Queue<uint8_t>& Game::get_clients_commands() {
