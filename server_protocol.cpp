@@ -2,18 +2,20 @@
 #include "server_protocol.h"
 #include <netinet/in.h>
 
-ServerProtocol::ServerProtocol(Socket& a_skt) : skt(a_skt) {}
+ServerProtocol::ServerProtocol(Socket& a_skt) : skt(a_skt), was_closed(false) {}
 
 uint8_t ServerProtocol::receive_msg() {
-    // try catch?
-    bool was_closed = false;
-    uint8_t msg = 0;
-    skt.recvall(&msg, sizeof(uint8_t), &was_closed);
-    return msg;
+    try {
+        uint8_t msg = 0;
+        skt.recvall(&msg, sizeof(uint8_t), &was_closed);
+        return msg;
+    } catch (const std::exception& err) {
+        std::cerr << "Exception: " << err.what() << "\n";
+        return -1;
+    }
 }
 
 void ServerProtocol::send_status(uint16_t alive_cnt, uint8_t last_type_event) {
-    bool was_closed = false;
     uint8_t header_server = HEADER_SERVER;
     uint16_t enemies_alive_cnt = alive_cnt;
     enemies_alive_cnt = ntohs(enemies_alive_cnt);
@@ -28,4 +30,8 @@ void ServerProtocol::send_status(uint16_t alive_cnt, uint8_t last_type_event) {
     if (was_closed) {
         throw std::runtime_error("Server message couldn't be sent, the socket was closed.");
     }
+}
+
+bool ServerProtocol::get_was_closed() {
+    return was_closed;
 }

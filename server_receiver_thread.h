@@ -2,7 +2,6 @@
 #ifndef THREADS_2024C1_VICKYA5_SERVER_RECEIVER_THREAD_H
 #define THREADS_2024C1_VICKYA5_SERVER_RECEIVER_THREAD_H
 
-#include "common_socket.h"
 #include "server_map_queues.h"
 #include "server_queue.h"
 #include "server_protocol.h"
@@ -13,6 +12,7 @@
 class ReceiverThread: public Thread {
 private:
     std::atomic<bool> still_alive{true};
+    std::atomic<bool> connection_alive{true};
     Queue<uint8_t>& clients_commands_queue;
     Socket client_skt;
     SenderThread sender;

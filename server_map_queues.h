@@ -3,7 +3,6 @@
 #define THREADS_2024C1_VICKYA5_MAPQUEUES_H
 
 #include <array>
-#include <iostream>
 #include <map>
 #include <mutex>
 #include "server_queue.h"

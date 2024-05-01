@@ -13,6 +13,7 @@ class ServerProtocol {
 
 private:
     Socket& skt;
+    bool was_closed;
 
 public:
     explicit ServerProtocol(Socket& a_skt);
@@ -26,6 +27,11 @@ public:
      *
      * */
     void send_status(uint16_t alive_cnt, uint8_t last_type_event);
+
+    /*
+     *
+     * */
+    bool get_was_closed();
 };
 
 

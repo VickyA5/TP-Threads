@@ -1,7 +1,6 @@
 
 #include "common_status_printer.h"
 #include "server_acceptor_thread.h"
-#include "server_queue.h"
 
 AcceptorThread::AcceptorThread(Socket& skt, Queue<uint8_t>& clients_commands_queue,
                                MapQueues& map_queues) :
@@ -16,7 +15,8 @@ void AcceptorThread::run() {
                                                             clients_commands_queue);
             clients.push_back(new_thread);
             Queue<ServerMessage>& server_msgs_queue = new_thread->get_server_msgs_queue();
-            map_queues.add_new_queue(server_msgs_queue);
+            //revisar temas punteros
+            map_queues.add_new_queue(&server_msgs_queue);
             new_thread->start();
             clean_clients();
         }

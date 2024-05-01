@@ -2,14 +2,15 @@
 #include "server_sender_thread.h"
 
 
-SenderThread::SenderThread(Socket& skt) : client_skt(skt) {}
+SenderThread::SenderThread(Socket& skt) : client_skt(skt), connection_alive(true) {}
 
 void SenderThread::run() {
-    // dentro de un while?
-    ServerMessage message = server_messages.pop();
     ServerProtocol protocol(client_skt);
-    protocol.send_status(message.get_alive_cnt(), message.get_type_event());
-
+    while (connection_alive) {
+        ServerMessage message = server_messages.pop();
+        protocol.send_status(message.get_alive_cnt(), message.get_type_event());
+        connection_alive = not protocol.get_was_closed();
+    }
 }
 
 Queue<ServerMessage>& SenderThread::get_server_msgs_queue() {
