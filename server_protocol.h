@@ -5,7 +5,7 @@
 #include <iostream>
 
 #include "common_socket.h"
-#include "server_monitor_game.h"
+#include "server_game.h"
 
 #define HEADER_SERVER 0x06
 
@@ -25,7 +25,7 @@ public:
     /*
      *
      * */
-    void send_status(int alive_cnt, uint8_t last_type_event);
+    void send_status(uint16_t alive_cnt, uint8_t last_type_event);
 };
 
 

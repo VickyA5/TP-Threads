@@ -7,10 +7,11 @@ Server::Server(const char* service_name) : acceptor_skt(service_name) {
 
 int Server::run(){
 
-    GameMonitor game;
-    AcceptorThread acceptor(acceptor_skt, game);
+    MapQueues map_queues;
+    Gameloop gameloop(map_queues);
+    Queue<uint8_t>& clients_commands_queue = gameloop.get_clients_commands();
+    AcceptorThread acceptor(acceptor_skt, clients_commands_queue, map_queues);
     acceptor.start();
-    Gameloop gameloop(game);
     gameloop.start();
     while (std::cin.get() != EXIT) {}
     acceptor.stop_acceptor();

@@ -1,7 +1,7 @@
 
 #include "server_gameloop_thread.h"
 
-Gameloop::Gameloop(GameMonitor& the_game) : game(the_game){}
+Gameloop::Gameloop(MapQueues& map_queues) : map_queues(map_queues){}
 
 void Gameloop::run() {
 
@@ -15,4 +15,8 @@ void Gameloop::run() {
 
 void Gameloop::stop_loop() {
     this->continue_loop = false;
+}
+
+Queue<uint8_t>& Gameloop::get_clients_commands() {
+    return game.get_clients_commands();
 }

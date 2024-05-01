@@ -5,17 +5,17 @@
 ServerProtocol::ServerProtocol(Socket& a_skt) : skt(a_skt) {}
 
 uint8_t ServerProtocol::receive_msg() {
+    // try catch?
     bool was_closed = false;
     uint8_t msg = 0;
     skt.recvall(&msg, sizeof(uint8_t), &was_closed);
     return msg;
 }
 
-//Deberia recibir como parametro al map de queues
-void ServerProtocol::send_status(int alive_cnt, uint8_t last_type_event) {
+void ServerProtocol::send_status(uint16_t alive_cnt, uint8_t last_type_event) {
     bool was_closed = false;
     uint8_t header_server = HEADER_SERVER;
-    uint16_t enemies_alive_cnt = (uint16_t) alive_cnt;
+    uint16_t enemies_alive_cnt = alive_cnt;
     enemies_alive_cnt = ntohs(enemies_alive_cnt);
     uint16_t enemies_dead_cnt = 5 - enemies_alive_cnt;
     enemies_dead_cnt = ntohs(enemies_dead_cnt);

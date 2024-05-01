@@ -2,18 +2,19 @@
 #ifndef THREADS_2024C1_VICKYA5_SERVER_GAMELOOP_H
 #define THREADS_2024C1_VICKYA5_SERVER_GAMELOOP_H
 
-#include "server_monitor_game.h"
-#include "server_thread.h"
+#include "server_game.h"
 #include "server_protocol.h"
+#include "server_thread.h"
 
 class Gameloop : public Thread {
 private:
-    GameMonitor& game;
+    MapQueues& map_queues;
+    Game game;
     std::atomic<bool> continue_loop{true};
 
 public:
 
-    explicit Gameloop(GameMonitor& the_game);
+    explicit Gameloop(MapQueues& map_queues);
 
     /*
      *
@@ -25,6 +26,12 @@ public:
      *
      * */
     void stop_loop();
+
+
+    /*
+     *
+     * */
+    Queue<uint8_t>& get_clients_commands();
 };
 
 

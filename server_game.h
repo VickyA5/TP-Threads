@@ -1,6 +1,6 @@
 
-#ifndef THREADS_2024C1_VICKYA5_SERVER_MONITOR_GAME_H
-#define THREADS_2024C1_VICKYA5_SERVER_MONITOR_GAME_H
+#ifndef THREADS_2024C1_VICKYA5_SERVER_GAME_H
+#define THREADS_2024C1_VICKYA5_SERVER_GAME_H
 
 #include <array>
 #include <iostream>
@@ -12,12 +12,12 @@
 #define KILLED 0x04
 #define REVIVED 0x05
 
-class GameMonitor {
+class Game {
 private:
     std::array<Enemy, 5> enemies;
     uint8_t last_type_event;
-    std::mutex game_mutex;
     MapQueues map_queues;
+    Queue<uint8_t> clients_commands;
 
     /*
      * Kills an enemy. If all of them were already dead, nothing happens.
@@ -35,7 +35,7 @@ private:
     int get_alive_cnt();
 
 public:
-    GameMonitor();
+    Game();
 
     /*
      *
@@ -57,7 +57,12 @@ public:
      * */
     void push_server_msg();
 
+    /*
+     *
+     * */
+    Queue<uint8_t>& get_clients_commands();
+
 };
 
 
-#endif  // THREADS_2024C1_VICKYA5_SERVER_MONITOR_GAME_H
+#endif  // THREADS_2024C1_VICKYA5_SERVER_GAME_H
