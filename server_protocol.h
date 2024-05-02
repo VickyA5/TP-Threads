@@ -3,9 +3,8 @@
 #define THREADS_2024C1_VICKYA5_SERVER_PROTOCOL_H
 
 #include <iostream>
-
 #include "common_socket.h"
-#include "server_game.h"
+#include "server_message.h"
 
 #define HEADER_SERVER 0x06
 
@@ -26,7 +25,7 @@ public:
     /*
      *
      * */
-    void send_status(uint16_t alive_cnt, uint8_t last_type_event);
+    void send_status(ServerMessage message);
 
     /*
      *

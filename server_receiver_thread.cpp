@@ -11,7 +11,7 @@ void ReceiverThread::run() {
     ServerProtocol protocol(client_skt);
     uint8_t msg = 0;
     sender.start();
-    while (connection_alive) {
+    while (connection_alive && still_alive) {
         msg = protocol.receive_msg();
         connection_alive = protocol.get_was_closed();
         if (msg == ATTACK) {
@@ -25,6 +25,7 @@ void ReceiverThread::run() {
 
 void ReceiverThread::kill() {
     still_alive = false;
+    clients_commands_queue.close();
     client_skt.shutdown(SHUTDOWN);
     client_skt.close();
 }
@@ -33,7 +34,6 @@ Queue<ServerMessage>& ReceiverThread::get_server_msgs_queue() {
     return sender.get_server_msgs_queue();
 }
 
-//REFACTORIZAR
 bool ReceiverThread::is_still_alive() {
-    return true;
+    return connection_alive;
 }

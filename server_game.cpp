@@ -26,8 +26,8 @@ bool Game::revive_enemy() {
     return an_enemy_was_revived;
 }
 
-int Game::get_alive_cnt()  {
-    int alive = 0;
+uint16_t Game::get_alive_cnt()  {
+    uint16_t alive = 0;
     for (Enemy& enemy : enemies) {
         if (enemy.is_alive())
             alive++;
@@ -36,6 +36,7 @@ int Game::get_alive_cnt()  {
 }
 
 void Game::iteration() {
+    //Primero elimino las colas cerradas?
     StatusPrinter printer;
     uint8_t last_command = clients_commands.pop();
     if (last_command == ATTACK) {
@@ -49,7 +50,7 @@ void Game::iteration() {
 }
 
 void Game::broadcast() {
-    int alive_cnt = get_alive_cnt();
+    uint16_t alive_cnt = get_alive_cnt();
     map_queues.broadcast(alive_cnt, last_type_event);
 }
 

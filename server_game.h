@@ -4,7 +4,6 @@
 
 #include <array>
 #include <iostream>
-
 #include "server_enemy.h"
 #include "server_map_queues_monitor.h"
 #include "server_queue.h"
@@ -34,7 +33,7 @@ private:
     /*
      *
      * */
-    int get_alive_cnt();
+    uint16_t get_alive_cnt();
 
     /*
      *
@@ -48,12 +47,6 @@ public:
      *
      * */
     void iteration();
-
-
-    /*
-     *
-     * */
-    void push_server_msg();
 
     /*
      *

@@ -15,15 +15,14 @@ void AcceptorThread::run() {
                                                             clients_commands_queue);
             clients.push_back(new_thread);
             Queue<ServerMessage>& server_msgs_queue = new_thread->get_server_msgs_queue();
-            //revisar temas punteros
             // VER TEMA DE BORRAR LAS COLAS QUE YA NO SIRVAN
-            map_queues.add_new_queue(&server_msgs_queue);
+            map_queues.add_new_queue(server_msgs_queue);
             new_thread->start();
             clean_clients();
         }
     } catch (const std::exception& err) {
         if (still_alive) {
-            std::cerr << "Unexpected exception: " << err.what() << "\n";
+            std::cerr << "Unexpected exception at acceptor: " << err.what() << "\n";
         }
         kill_all_clients();
         still_alive = false;

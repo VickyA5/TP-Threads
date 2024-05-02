@@ -2,9 +2,6 @@
 #ifndef THREADS_2024C1_VICKYA5_SERVER_RECEIVER_THREAD_H
 #define THREADS_2024C1_VICKYA5_SERVER_RECEIVER_THREAD_H
 
-#include "server_map_queues_monitor.h"
-#include "server_protocol.h"
-#include "server_queue.h"
 #include "server_sender_thread.h"
 
 #define SHUTDOWN 2

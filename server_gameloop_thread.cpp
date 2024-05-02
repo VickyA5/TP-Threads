@@ -6,7 +6,6 @@ Gameloop::Gameloop(MapQueues& map_queues) : map_queues(map_queues){}
 void Gameloop::run() {
 
     while (continue_loop) {
-        // Debería proteger también acá?
         game.iteration();
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
     }

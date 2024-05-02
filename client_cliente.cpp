@@ -17,18 +17,19 @@ void Client::run() {
         }
         if (!line.empty()) {
             action = parser.parsing(line, read);
-            translateAction(action, read);
+            translate_action(action, read);
         }
     }
 }
+//SE TRABA AL RECIBIR DEL SERVER, OSEA EL SERVER NO L ESTA ENVIANDO
 
-void Client::translateAction(int action, bool read) {
+void Client::translate_action(int action, bool read) {
     if (action == INVALID_ACTION) {
         throw std::runtime_error("Error: an invalid action was received");
     } else if (action == ATACAR && !read) {
         protocol.send_msg_attack();
     } else {
-        uint8_t  type_event = 0;
+        uint8_t type_event = 0;
         int alive_count;
         for (int i = 0; i < action; ++i) {
             alive_count = protocol.receive_msg(type_event);

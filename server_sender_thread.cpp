@@ -9,7 +9,7 @@ void SenderThread::run() {
     while (connection_alive) {
         // o hace un try_pop y cuando haya algo se envía el status
         ServerMessage message = server_messages.pop();
-        protocol.send_status(message.get_alive_cnt(), message.get_type_event());
+        protocol.send_status(message);
         connection_alive = not protocol.get_was_closed();
     }
 }

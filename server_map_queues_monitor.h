@@ -18,7 +18,7 @@ public:
      *
      * void add_new_queue(const size_t& idThrClient, Queue<std::array<uint16_t, 4>>* a_queue);
      * */
-    void add_new_queue(Queue<ServerMessage>* a_queue);
+    void add_new_queue(Queue<ServerMessage>& new_queue);
 
     /*
      *
@@ -29,7 +29,7 @@ void push_server_message();
     /*
      *
      * */
-    void broadcast(int alive_cnt, uint8_t last_type_event);
+    void broadcast(uint16_t alive_cnt, uint8_t last_type_event);
 };
 
 
