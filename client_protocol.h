@@ -8,6 +8,7 @@
 #include <array>
 
 #define ATTACK 0x03
+#define SHUTDOWN 2
 
 class ClientProtocol {
 
@@ -32,6 +33,11 @@ public:
      * Returns the number of alive enemies.
      * */
     int receive_msg(uint8_t & type_event);
+
+    /*
+     *
+     * */
+    void close_connection();
 };
 
 

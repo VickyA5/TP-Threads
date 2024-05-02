@@ -2,9 +2,7 @@
 #ifndef THREADS_2024C1_VICKYA5_MAPQUEUES_H
 #define THREADS_2024C1_VICKYA5_MAPQUEUES_H
 
-#include <array>
 #include <map>
-#include <mutex>
 #include "server_queue.h"
 #include "server_message.h"
 
@@ -24,8 +22,9 @@ public:
 
     /*
      *
+     *
+void push_server_message();
      * */
-    void push_server_message();
 
     /*
      *

@@ -36,9 +36,11 @@ int Game::get_alive_cnt()  {
 }
 
 void Game::iteration() {
+    StatusPrinter printer;
     uint8_t last_command = clients_commands.pop();
     if (last_command == ATTACK) {
         kill_enemy();
+        printer.print_status(last_type_event,get_alive_cnt());
         broadcast();
     }
     bool an_enemy_was_revived = revive_enemy();

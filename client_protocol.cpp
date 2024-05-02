@@ -42,3 +42,8 @@ int ClientProtocol::receive_msg(uint8_t & type_event) {
 
 }
 
+void ClientProtocol::close_connection() {
+    socket.shutdown(2);
+    socket.close();
+}
+

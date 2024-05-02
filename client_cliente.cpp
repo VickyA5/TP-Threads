@@ -6,14 +6,13 @@
 Client::Client(const char* host_name, const char* service_name) :
         protocol(host_name, service_name) {}
 
-// Quizas hacer que el parser haga el getline y devuelva la accion.
 void Client::run() {
     std::string line;
     int action;
     bool read = false;
     while (std::getline(std::cin, line, '\n')) {
         if (line == SALIR) {
-            //cerrar conexion
+            protocol.close_connection();
             return;
         }
         if (!line.empty()) {

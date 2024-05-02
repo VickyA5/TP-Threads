@@ -16,6 +16,7 @@ void AcceptorThread::run() {
             clients.push_back(new_thread);
             Queue<ServerMessage>& server_msgs_queue = new_thread->get_server_msgs_queue();
             //revisar temas punteros
+            // VER TEMA DE BORRAR LAS COLAS QUE YA NO SIRVAN
             map_queues.add_new_queue(&server_msgs_queue);
             new_thread->start();
             clean_clients();
