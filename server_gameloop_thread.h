@@ -24,7 +24,7 @@ public:
     /*
      *
      * */
-    void stop_loop();
+    void stop() override;
 
 
     /*

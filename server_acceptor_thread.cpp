@@ -16,7 +16,8 @@ void AcceptorThread::run() {
             Socket new_client = listener_skt.accept();
             ReceiverThread* new_thread = new ReceiverThread(std::move(new_client),
                                                             clients_commands_queue,
-                                                            map_queues, id_client);
+                                                            map_queues,
+                                                            id_client);
             clients.push_back(new_thread);
             Queue<ServerMessage>& server_msgs_queue = new_thread->get_server_msgs_queue();
             // VER TEMA DE BORRAR LAS COLAS QUE YA NO SIRVAN
@@ -26,6 +27,7 @@ void AcceptorThread::run() {
             id_client++;
         }
     } catch (const std::exception& err) {
+        // Cuando se lanzaria esta excepcion? No deberia matarlos solamente si se invoca al stop de aca[?
         if (still_alive) {
             std::cerr << "Unexpected exception at acceptor: " << err.what() << "\n";
         }
@@ -46,7 +48,6 @@ void AcceptorThread::clean_clients() {
     });
 }
 
-//void AcceptorThread::kill()
 
 void AcceptorThread::kill_all_clients() {
     for (auto& client: clients) {
@@ -57,6 +58,6 @@ void AcceptorThread::kill_all_clients() {
     clients.clear();
 }
 
-void AcceptorThread::stop_acceptor() {
+void AcceptorThread::stop() {
     this->still_alive = false;
 }

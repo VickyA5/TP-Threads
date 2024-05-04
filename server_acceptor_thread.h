@@ -39,7 +39,7 @@ public:
     /*
      *
      * */
-    void stop_acceptor();
+    void stop() override;
 
     /*
      *

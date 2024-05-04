@@ -9,6 +9,7 @@ void SenderThread::run() {
     ServerProtocol protocol(client_skt);
     while (connection_alive) {
         // o hace un try_pop y cuando haya algo se envía el status
+        // ACA FALLA. No popea nada cuando sí debería haber un mensaje
         ServerMessage message = server_messages.pop();
         protocol.send_status(message);
         connection_alive = not protocol.get_was_closed();

@@ -10,9 +10,10 @@ void Gameloop::run() {
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
     }
     game.stop_game();
+    std::cout << "Se cierra el juego" << std::endl;
 }
 
-void Gameloop::stop_loop() {
+void Gameloop::stop() {
     this->continue_loop = false;
 }
 
