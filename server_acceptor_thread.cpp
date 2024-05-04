@@ -26,11 +26,13 @@ void AcceptorThread::run() {
             clean_clients();
             id_client++;
         }
+        //kill_all_clients();
     } catch (const std::exception& err) {
-        // Cuando se lanzaria esta excepcion? No deberia matarlos solamente si se invoca al stop de aca[?
+        // Se llega acá con el close del socket aceptador desde fuera
         if (still_alive) {
             std::cerr << "Unexpected exception at acceptor: " << err.what() << "\n";
         }
+        //Llega acá, después se detiene en el join del acceptor
         kill_all_clients();
         still_alive = false;
     }
@@ -58,6 +60,8 @@ void AcceptorThread::kill_all_clients() {
     clients.clear();
 }
 
-void AcceptorThread::stop() {
-    this->still_alive = false;
+void AcceptorThread::kill() {
+    still_alive = false;
+    listener_skt.shutdown(2); //Unexpected exception: The queue is closed
+    listener_skt.close();
 }

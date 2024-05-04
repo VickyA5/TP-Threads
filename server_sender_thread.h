@@ -13,11 +13,12 @@ private:
     Socket& client_skt;
     Queue<ServerMessage> server_messages;
     bool connection_alive;
+    bool still_alive;
     MapQueues& queues;
     size_t id;
 
 public:
-    explicit SenderThread(Socket& skt, MapQueues& map_queues, size_t an_id);
+    SenderThread(Socket& skt, MapQueues& map_queues, size_t an_id);
 
     /*
      *
@@ -28,6 +29,11 @@ public:
      *
      * */
     Queue<ServerMessage>& get_server_msgs_queue();
+
+    /*
+     *
+     * */
+    void kill();
 };
 
 

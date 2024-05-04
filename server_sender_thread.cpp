@@ -1,25 +1,29 @@
 
 #include "server_sender_thread.h"
 
-
 SenderThread::SenderThread(Socket& skt, MapQueues& map_queues, size_t an_id) : client_skt(skt),
-        connection_alive(true), queues(map_queues), id(an_id) {}
+         connection_alive(true), still_alive(true), queues(map_queues), id(an_id) {}
 
 void SenderThread::run() {
     ServerProtocol protocol(client_skt);
-    while (connection_alive) {
-        // o hace un try_pop y cuando haya algo se envía el status
-        // ACA FALLA. No popea nada cuando sí debería haber un mensaje
+    while (connection_alive && still_alive) {
         ServerMessage message = server_messages.pop();
         protocol.send_status(message);
         connection_alive = not protocol.get_was_closed();
     }
+    queues.delete_queue(id);
+    server_messages.close();
+    /*
     if (!connection_alive) {
         queues.delete_queue(id);
         server_messages.close();
-    }
+    } */
 }
 
 Queue<ServerMessage>& SenderThread::get_server_msgs_queue() {
     return server_messages;
+}
+
+void SenderThread::kill() {
+    still_alive = false;
 }

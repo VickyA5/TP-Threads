@@ -39,7 +39,7 @@ public:
     /*
      *
      * */
-    void stop() override;
+    void kill();
 
     /*
      *
