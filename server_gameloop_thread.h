@@ -3,7 +3,6 @@
 #define THREADS_2024C1_VICKYA5_SERVER_GAMELOOP_H
 
 #include "server_game.h"
-#include "server_protocol.h"
 #include "server_thread.h"
 
 class Gameloop : public Thread {

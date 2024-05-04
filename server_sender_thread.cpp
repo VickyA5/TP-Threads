@@ -15,6 +15,7 @@ void SenderThread::run() {
     }
     if (!connection_alive) {
         queues.delete_queue(id);
+        server_messages.close();
     }
 }
 

@@ -26,7 +26,6 @@ void ReceiverThread::run() {
 
 void ReceiverThread::kill() {
     still_alive = false;
-    clients_commands_queue.close();
     client_skt.shutdown(SHUTDOWN);
     client_skt.close();
 }

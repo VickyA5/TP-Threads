@@ -9,6 +9,7 @@ void Gameloop::run() {
         game.iteration();
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
     }
+    game.stop_game();
 }
 
 void Gameloop::stop_loop() {

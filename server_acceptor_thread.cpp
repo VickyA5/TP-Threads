@@ -2,9 +2,11 @@
 #include "common_status_printer.h"
 #include "server_acceptor_thread.h"
 
-AcceptorThread::AcceptorThread(Socket& skt, Queue<uint8_t>& clients_commands_queue,
+AcceptorThread::AcceptorThread(Socket& skt,
+                               Queue<uint8_t>& clients_commands_queue,
                                MapQueues& map_queues) :
-        listener_skt(skt), clients_commands_queue(clients_commands_queue),
+        listener_skt(skt),
+        clients_commands_queue(clients_commands_queue),
         map_queues(map_queues) {}
 
 void AcceptorThread::run() {
@@ -35,7 +37,6 @@ void AcceptorThread::run() {
 void AcceptorThread::clean_clients() {
 
     clients.remove_if([this](ReceiverThread* client) {
-        //REVISAR lo de is_still_alive
         if (!client->is_still_alive()) {
             client->join();
             delete client;

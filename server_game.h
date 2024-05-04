@@ -53,6 +53,7 @@ public:
      * */
     Queue<uint8_t>& get_clients_commands();
 
+    void stop_game();
 };
 
 

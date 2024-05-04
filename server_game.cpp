@@ -57,3 +57,7 @@ void Game::broadcast() {
 Queue<uint8_t>& Game::get_clients_commands() {
     return clients_commands;
 }
+
+void Game::stop_game() {
+    clients_commands.close();
+}
