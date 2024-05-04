@@ -1,9 +1,10 @@
 
 #include "server_receiver_thread.h"
 
-ReceiverThread::ReceiverThread(Socket skt_peer, Queue<uint8_t>& clients_commands_queue) :
+ReceiverThread::ReceiverThread(Socket skt_peer, Queue<uint8_t>& clients_commands_queue,
+                               MapQueues& map_queues, size_t an_id) :
          clients_commands_queue(clients_commands_queue), client_skt(std::move(skt_peer)),
-        sender(client_skt) {
+        sender(client_skt, map_queues, an_id) {
 }
 
 // REVISAR EL ORDEN EN QUE HAGO LAS COSAS

@@ -9,16 +9,19 @@ AcceptorThread::AcceptorThread(Socket& skt, Queue<uint8_t>& clients_commands_que
 
 void AcceptorThread::run() {
     try {
+        size_t id_client = 0;
         while (still_alive) {
             Socket new_client = listener_skt.accept();
             ReceiverThread* new_thread = new ReceiverThread(std::move(new_client),
-                                                            clients_commands_queue);
+                                                            clients_commands_queue,
+                                                            map_queues, id_client);
             clients.push_back(new_thread);
             Queue<ServerMessage>& server_msgs_queue = new_thread->get_server_msgs_queue();
             // VER TEMA DE BORRAR LAS COLAS QUE YA NO SIRVAN
-            map_queues.add_new_queue(server_msgs_queue);
+            map_queues.add_new_queue(id_client, server_msgs_queue);
             new_thread->start();
             clean_clients();
+            id_client++;
         }
     } catch (const std::exception& err) {
         if (still_alive) {

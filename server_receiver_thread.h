@@ -16,7 +16,10 @@ private:
     SenderThread sender;
 
 public:
-    ReceiverThread(Socket skt_peer, Queue<uint8_t>& clients_commands_queue);
+    ReceiverThread(Socket skt_peer,
+                   Queue<uint8_t>& clients_commands_queue,
+                   MapQueues& map_queues,
+                   size_t an_id);
 
     /*
      *
