@@ -18,7 +18,7 @@ public:
      *
      *
      * */
-    void add_new_queue(size_t id_client, Queue<ServerMessage>& new_queue);
+    void add_new_queue(size_t id_client, Queue<ServerMessage>* new_queue);
 
     /*
      *

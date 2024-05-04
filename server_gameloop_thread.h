@@ -7,7 +7,6 @@
 
 class Gameloop : public Thread {
 private:
-    MapQueues& map_queues;
     Game game;
     std::atomic<bool> continue_loop{true};
 

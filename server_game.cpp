@@ -1,7 +1,7 @@
 
 #include "server_game.h"
 
-Game::Game() {
+Game::Game(MapQueues& map_queues) : map_queues(map_queues) {
     this->last_type_event = 0;
 }
 

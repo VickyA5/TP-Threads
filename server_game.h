@@ -17,7 +17,7 @@ class Game {
 private:
     std::array<Enemy, 5> enemies;
     uint8_t last_type_event;
-    MapQueues map_queues;
+    MapQueues& map_queues;
     Queue<uint8_t> clients_commands;
 
     /*
@@ -41,7 +41,7 @@ private:
     void broadcast();
 
 public:
-    Game();
+    Game(MapQueues& map_queues);
 
     /*
      *

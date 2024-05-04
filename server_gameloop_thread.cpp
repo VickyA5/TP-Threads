@@ -1,7 +1,7 @@
 
 #include "server_gameloop_thread.h"
 
-Gameloop::Gameloop(MapQueues& map_queues) : map_queues(map_queues){}
+Gameloop::Gameloop(MapQueues& map_queues) : game(map_queues){}
 
 void Gameloop::run() {
 
