@@ -4,6 +4,7 @@
 int ClientParser::parsing(std::string line, bool& read) {
     int ret = -1;
     if (line == "Atacar") {
+        read = false;
         ret = 0;
     } else {
         read = true;
