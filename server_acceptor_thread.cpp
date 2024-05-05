@@ -39,7 +39,7 @@ void AcceptorThread::run() {
 void AcceptorThread::clean_clients() {
 
     clients.remove_if([this](ReceiverThread* client) {
-        if (!client->is_still_alive()) {
+        if (client->is_dead()) {
             std::cout << "A ver si se entra por aqui " << std::endl;
             client->join();
             delete client;

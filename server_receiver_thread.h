@@ -9,8 +9,9 @@
 
 class ReceiverThread: public Thread {
 private:
-    std::atomic<bool> still_alive{true};
+    std::atomic<bool> keep_talking{true};
     std::atomic<bool> connection_alive{true};
+    std::atomic<bool> is_alive{true};
     Queue<uint8_t>& clients_commands_queue;
     Socket client_skt;
     SenderThread sender;
@@ -34,7 +35,7 @@ public:
     /*
      *
      * */
-    bool is_still_alive();
+    bool is_dead();
 
     /*
      *

@@ -3,7 +3,6 @@
 
 MapQueues::MapQueues() {}
 
-// o try_push ?
 void MapQueues::broadcast(uint16_t alive_cnt, uint8_t last_type_event) {
     std::unique_lock<std::mutex> lck(mtx);
     // Estoy poniendo una copia del mismo mensaje en todas las queues, ta bien?
@@ -11,6 +10,7 @@ void MapQueues::broadcast(uint16_t alive_cnt, uint8_t last_type_event) {
     for (auto& element : server_messages) {
         auto& queue_ptr = element.second;
         if (queue_ptr) {
+            //Mepa que en teoría debería ser un try_push ya que el gameloop no puede detenerse nunca
             queue_ptr->push(new_message);
         }
     }

@@ -13,7 +13,7 @@ private:
     Socket& client_skt;
     Queue<ServerMessage> server_messages;
     bool connection_alive;
-    bool still_alive;
+    bool keep_talking;
     MapQueues& queues;
     size_t id;
 

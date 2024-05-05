@@ -12,7 +12,6 @@ void Gameloop::run() {
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
         it++;
     }
-    //game.stop_game();
     std::cout << "Se cierra el juego" << std::endl;
 }
 

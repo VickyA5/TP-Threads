@@ -2,18 +2,23 @@
 #include "server_sender_thread.h"
 
 SenderThread::SenderThread(Socket& skt, MapQueues& map_queues, size_t an_id) : client_skt(skt),
-         connection_alive(true), still_alive(true), queues(map_queues), id(an_id) {}
+         connection_alive(true), keep_talking(true), queues(map_queues), id(an_id) {}
 
 void SenderThread::run() {
     ServerProtocol protocol(client_skt);
-    while (connection_alive && still_alive) {
+    while (connection_alive && keep_talking) {
         ServerMessage message = server_messages.pop();
         connection_alive = not protocol.get_was_closed();
         if (connection_alive) {
-            //quizas chequear que se envíe solamente cuando hay un mensaje efectivamente
             protocol.send_status(message);
         } else {
-            queues.delete_queue(id);
+            try {
+                //ADENTRO ME ESTARIA FALTANDO CATCHEAR EL MISMO ERROR NO?
+                queues.delete_queue(id);
+            } catch (/*const std::exception& err*/ ...) {
+                //std::cout << "El error que dijo tomi" << err.what() << std::endl;
+            }
+
             //server_messages.close();
         }
     }
@@ -29,5 +34,11 @@ Queue<ServerMessage>& SenderThread::get_server_msgs_queue() {
 }
 
 void SenderThread::kill() {
-    still_alive = false;
+    try {
+        keep_talking = false;
+        server_messages.close();
+    } catch (/*const std::exception& err*/ ...) {
+        //std::cout << "El error que dijo tomi" << err.what() << std::endl;
+    }
+
 }
