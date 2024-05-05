@@ -23,7 +23,11 @@ void MapQueues::add_new_queue(const size_t id_client, Queue<ServerMessage>* new_
 }
 
 void MapQueues::delete_queue(size_t id_to_delete) {
-    std::lock_guard<std::mutex> lock(mtx);
-    server_messages[id_to_delete]->close();
-    server_messages.erase(id_to_delete);
+    try {
+        std::lock_guard<std::mutex> lock(mtx);
+        server_messages[id_to_delete]->close();
+        server_messages.erase(id_to_delete);
+    } catch (const std::exception& err) {
+        std::cout << "El error que dijo tomi en el monitor" << err.what() << std::endl;
+    }
 }

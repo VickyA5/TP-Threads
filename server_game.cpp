@@ -36,7 +36,6 @@ uint16_t Game::get_alive_cnt()  {
 }
 
 void Game::iteration() {
-    //Primero elimino las colas cerradas?
     try {
         uint8_t last_command = 0;
         clients_commands.try_pop(last_command);
@@ -73,5 +72,5 @@ void Game::stop_game() {
 }*/
 
 Game::~Game() {
-    clients_commands.close();
+    //clients_commands.close();
 }

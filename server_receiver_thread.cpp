@@ -10,7 +10,6 @@ ReceiverThread::ReceiverThread(Socket skt_peer,
         sender(client_skt, map_queues, an_id) {
 }
 
-// REVISAR EL ORDEN EN QUE HAGO LAS COSAS
 void ReceiverThread::run() {
     ServerProtocol protocol(client_skt);
     uint8_t msg = 0;
@@ -27,12 +26,11 @@ void ReceiverThread::run() {
     is_alive = false;
     sender.kill();
     sender.join();
-    // No se está joineando el primer cliente, osea el que deberia limpiarse con el clean clients
     std::cout << "Join del sender completado " << std::endl;
 }
 
 void ReceiverThread::kill() {
-    sender.kill();
+    //sender.kill();
     keep_talking = false;
     client_skt.shutdown(SHUTDOWN);
     client_skt.close();

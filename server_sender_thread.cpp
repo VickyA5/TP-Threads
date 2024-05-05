@@ -13,20 +13,13 @@ void SenderThread::run() {
             protocol.send_status(message);
         } else {
             try {
-                //ADENTRO ME ESTARIA FALTANDO CATCHEAR EL MISMO ERROR NO?
                 queues.delete_queue(id);
-            } catch (/*const std::exception& err*/ ...) {
-                //std::cout << "El error que dijo tomi" << err.what() << std::endl;
+            } catch (const std::exception& err) {
             }
-
             //server_messages.close();
         }
     }
-    /*
-    if (!connection_alive) {
-        queues.delete_queue(id);
-        server_messages.close();
-    } */
+    queues.delete_queue(id);
 }
 
 Queue<ServerMessage>& SenderThread::get_server_msgs_queue() {
@@ -34,11 +27,8 @@ Queue<ServerMessage>& SenderThread::get_server_msgs_queue() {
 }
 
 void SenderThread::kill() {
-    try {
-        keep_talking = false;
-        server_messages.close();
-    } catch (/*const std::exception& err*/ ...) {
-        //std::cout << "El error que dijo tomi" << err.what() << std::endl;
-    }
-
+    keep_talking = false;
+    //queues.delete_queue(id);
+    //server_messages.close();
+    /*const std::exception& err*/
 }
