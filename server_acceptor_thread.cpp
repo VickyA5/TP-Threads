@@ -61,6 +61,8 @@ void AcceptorThread::kill_all_clients() {
 
 void AcceptorThread::kill() {
     still_alive = false;
+    /* En las diapos de clase no hacen el close del acceptor */
     listener_skt.shutdown(2); //Unexpected exception: The queue is closed
     listener_skt.close();
+
 }

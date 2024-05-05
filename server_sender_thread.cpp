@@ -15,7 +15,8 @@ void SenderThread::run() {
         } else {
             std::cout << "connection alive del sender es false" << std::endl;
             queues.delete_queue(id);
-            server_messages.close();
+            std::cout << "Imagino que la server_messages de este nuevo cliente falla al cerrarse" << std::endl;
+            //server_messages.close();
         }
     }
     std::cout << "Sale del while del sender" << std::endl;
