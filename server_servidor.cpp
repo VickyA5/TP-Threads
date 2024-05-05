@@ -14,8 +14,8 @@ int Server::run(){
     acceptor.start();
     gameloop.start();
     while (std::cin.get() != EXIT) {}
-    acceptor.kill();
     gameloop.stop();
+    acceptor.kill();
     acceptor.join();
     gameloop.join();
 

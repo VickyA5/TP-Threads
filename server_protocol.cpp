@@ -27,10 +27,10 @@ void ServerProtocol::send_status(ServerMessage message) {
     skt.sendall(&enemies_alive_cnt, sizeof(uint16_t), &was_closed);
     skt.sendall(&enemies_dead_cnt, sizeof(uint16_t), &was_closed);
     skt.sendall(&last_type_event, sizeof(uint8_t), &was_closed);
-
+    /*
     if (was_closed) {
         throw std::runtime_error("Server message couldn't be sent, the socket was closed.");
-    }
+    } */
 }
 
 bool ServerProtocol::get_was_closed() {

@@ -18,12 +18,12 @@ void Game::kill_enemy() {
 
 bool Game::revive_enemy() {
     this->last_type_event = REVIVED;
-    bool an_enemy_was_revived = false;
+    int revived_enemies = 0;
     for (Enemy& enemy : enemies) {
-        // Todos los enemigos deben enterarse que sucedió una iteración, y si corresponde reviven.
-        an_enemy_was_revived = enemy.try_revive();
+        if (enemy.try_revive())
+            revived_enemies++;
     }
-    return an_enemy_was_revived;
+    return (revived_enemies > 0);
 }
 
 uint16_t Game::get_alive_cnt()  {
@@ -37,16 +37,20 @@ uint16_t Game::get_alive_cnt()  {
 
 void Game::iteration() {
     //Primero elimino las colas cerradas?
-    StatusPrinter printer;
-    uint8_t last_command = clients_commands.pop();
-    if (last_command == ATTACK) {
-        kill_enemy();
-        printer.print_status(last_type_event,get_alive_cnt());
-        broadcast();
+    try {
+        uint8_t last_command = 0;
+        clients_commands.try_pop(last_command);
+        if (last_command == ATTACK) {
+            kill_enemy();
+            print_and_broadcast();
+        }
+        bool an_enemy_was_revived = revive_enemy();
+        if (an_enemy_was_revived) {
+            print_and_broadcast();
+        }
+    } catch (const std::exception& err) {
+        std::cout << "Lo que pasa en game es que: " << err.what() << "\n";
     }
-    bool an_enemy_was_revived = revive_enemy();
-    if (an_enemy_was_revived)
-        broadcast();
 }
 
 void Game::broadcast() {
@@ -54,10 +58,20 @@ void Game::broadcast() {
     map_queues.broadcast(alive_cnt, last_type_event);
 }
 
+void Game::print_and_broadcast() {
+    printer.print_status(last_type_event,get_alive_cnt());
+    broadcast();
+}
+
 Queue<uint8_t>& Game::get_clients_commands() {
     return clients_commands;
 }
 
+/*
 void Game::stop_game() {
+    clients_commands.close();
+}*/
+
+Game::~Game() {
     clients_commands.close();
 }

@@ -8,7 +8,6 @@
 #include "server_map_queues_monitor.h"
 #include "server_queue.h"
 #include "common_status_printer.h"
-
 #define ATTACK 0x03
 #define KILLED 0x04
 #define REVIVED 0x05
@@ -19,6 +18,7 @@ private:
     uint8_t last_type_event;
     MapQueues& map_queues;
     Queue<uint8_t> clients_commands;
+    StatusPrinter printer;
 
     /*
      * Kills an enemy. If all of them were already dead, nothing happens.
@@ -40,8 +40,13 @@ private:
      * */
     void broadcast();
 
+    /*
+     *
+     * */
+    void print_and_broadcast();
+
 public:
-    Game(MapQueues& map_queues);
+    explicit Game(MapQueues& map_queues);
 
     /*
      *
@@ -53,7 +58,8 @@ public:
      * */
     Queue<uint8_t>& get_clients_commands();
 
-    void stop_game();
+    //void stop_game();
+    ~Game();
 };
 
 

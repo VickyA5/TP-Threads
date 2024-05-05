@@ -17,6 +17,7 @@ bool Enemy::try_revive() {
         iterations++;
         if (iterations == ITERATIONS_REQUIRED_TO_REVIVE) {
             alive = true;
+            iterations = 0;
             return true;
         } else {
             return false;
