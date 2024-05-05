@@ -46,4 +46,3 @@ void ClientProtocol::close_connection() {
     socket.shutdown(2);
     socket.close();
 }
-

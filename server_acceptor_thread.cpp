@@ -27,11 +27,10 @@ void AcceptorThread::run() {
         }
         //kill_all_clients();
     } catch (const std::exception& err) {
-        // Se llega acá con el close del socket aceptador desde fuera
-        if (still_alive) {
+        //Se llega acá al cerrar listener_skt con el método kill.
+        /*if (still_alive) {
             std::cerr << "Unexpected exception at acceptor: " << err.what() << "\n";
-        }
-        //Llega acá, después se detiene en el join del acceptor
+        } */
         kill_all_clients();
         still_alive = false;
     }
@@ -41,6 +40,7 @@ void AcceptorThread::clean_clients() {
 
     clients.remove_if([this](ReceiverThread* client) {
         if (!client->is_still_alive()) {
+            std::cout << "A ver si se entra por aqui " << std::endl;
             client->join();
             delete client;
             return true;
@@ -60,9 +60,10 @@ void AcceptorThread::kill_all_clients() {
 }
 
 void AcceptorThread::kill() {
-    still_alive = false;
+    //still_alive = false;
+    //kill_all_clients();
     /* En las diapos de clase no hacen el close del acceptor */
-    listener_skt.shutdown(2); //Unexpected exception: The queue is closed
+    listener_skt.shutdown(1); //Unexpected exception: The queue is closed
     listener_skt.close();
 
 }

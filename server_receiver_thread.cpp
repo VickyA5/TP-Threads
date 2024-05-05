@@ -24,15 +24,14 @@ void ReceiverThread::run() {
             throw std::runtime_error("The message sent from the client wasn't the expected.");
         } */
     }
-    // No se llega ni acá, osea no sale nunca del while
-    std::cout << "Antes de hacer el join del sender" << "\n";
     //sender.kill();
     sender.join();
-    std::cout << "Se hizo bien el join del sender" << "\n";
+    // No se está joineando el primer cliente, osea el que deberia limpiarse con el clean clients
+    std::cout << "Join del sender completado " << std::endl;
 }
 
 void ReceiverThread::kill() {
-    //sender.kill();
+    sender.kill();
     still_alive = false;
     client_skt.shutdown(SHUTDOWN);
     client_skt.close();

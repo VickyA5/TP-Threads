@@ -13,13 +13,10 @@ void SenderThread::run() {
             //quizas chequear que se envíe solamente cuando hay un mensaje efectivamente
             protocol.send_status(message);
         } else {
-            std::cout << "connection alive del sender es false" << std::endl;
             queues.delete_queue(id);
-            std::cout << "Imagino que la server_messages de este nuevo cliente falla al cerrarse" << std::endl;
             //server_messages.close();
         }
     }
-    std::cout << "Sale del while del sender" << std::endl;
     /*
     if (!connection_alive) {
         queues.delete_queue(id);
