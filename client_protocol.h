@@ -2,10 +2,12 @@
 #ifndef THREADS_2024C1_VICKYA5_CLIENT_PROTOCOL_H
 #define THREADS_2024C1_VICKYA5_CLIENT_PROTOCOL_H
 
-#include "common_socket.h"
-#include <iostream>
-#include <netinet/in.h>
 #include <array>
+#include <iostream>
+
+#include <netinet/in.h>
+
+#include "common_socket.h"
 
 #define ATTACK 0x03
 #define SHUTDOWN 2
@@ -15,6 +17,7 @@ class ClientProtocol {
 private:
     Socket socket;
     bool was_closed;
+
 public:
     ClientProtocol(const char* host_name, const char* service_name);
 
@@ -32,7 +35,7 @@ public:
      *
      * Returns the number of alive enemies.
      * */
-    int receive_msg(uint8_t & type_event);
+    int receive_msg(uint8_t& type_event);
 
     /*
      *

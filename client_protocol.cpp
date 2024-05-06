@@ -1,7 +1,7 @@
 
 #include "client_protocol.h"
 
-ClientProtocol::ClientProtocol(const char* host_name, const char* service_name) :
+ClientProtocol::ClientProtocol(const char* host_name, const char* service_name):
         socket(host_name, service_name), was_closed(false) {}
 
 void ClientProtocol::send_msg_attack() {
@@ -13,7 +13,7 @@ void ClientProtocol::send_msg_attack() {
     }
 }
 
-int ClientProtocol::receive_msg(uint8_t & type_event) {
+int ClientProtocol::receive_msg(uint8_t& type_event) {
     uint8_t header = 0;
     uint16_t enemies_alive = 0;
     uint16_t enemies_dead = 0;
@@ -33,13 +33,12 @@ int ClientProtocol::receive_msg(uint8_t & type_event) {
         if (was_closed) {
             throw std::runtime_error("Server message couldn't be received.");
         }
-        return (int) enemies_alive;
+        return (int)enemies_alive;
 
     } catch (const std::exception& err) {
         std::cerr << "Something went wrong: " << err.what() << "\n";
         return -1;
     }
-
 }
 
 void ClientProtocol::close_connection() {

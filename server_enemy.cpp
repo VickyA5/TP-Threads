@@ -25,6 +25,4 @@ bool Enemy::try_revive() {
     }
 }
 
-bool Enemy::is_alive() {
-    return alive;
-}
+bool Enemy::is_alive() { return alive; }

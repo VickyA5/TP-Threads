@@ -4,10 +4,11 @@
 
 #include <array>
 #include <iostream>
+
+#include "common_status_printer.h"
 #include "server_enemy.h"
 #include "server_map_queues_monitor.h"
 #include "server_queue.h"
-#include "common_status_printer.h"
 #define ATTACK 0x03
 #define KILLED 0x04
 #define REVIVED 0x05
@@ -58,7 +59,7 @@ public:
      * */
     Queue<uint8_t>& get_clients_commands();
 
-    //void stop_game();
+    // void stop_game();
     ~Game();
 };
 

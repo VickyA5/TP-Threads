@@ -5,13 +5,12 @@
 #include "server_game.h"
 #include "server_thread.h"
 
-class Gameloop : public Thread {
+class Gameloop: public Thread {
 private:
     Game game;
     std::atomic<bool> continue_loop{true};
 
 public:
-
     explicit Gameloop(MapQueues& map_queues);
 
     /*

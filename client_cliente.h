@@ -24,7 +24,6 @@ public:
      * Executes the loop that reads the inputs and delegates to ClientParser the parsing.
      * */
     void run();
-
 };
 
 

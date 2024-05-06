@@ -1,9 +1,10 @@
 
-#include <string>
-#include <iostream>
 #include "client_cliente.h"
 
-Client::Client(const char* host_name, const char* service_name) :
+#include <iostream>
+#include <string>
+
+Client::Client(const char* host_name, const char* service_name):
         protocol(host_name, service_name) {}
 
 void Client::run() {

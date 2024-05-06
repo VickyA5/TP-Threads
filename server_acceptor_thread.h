@@ -5,12 +5,14 @@
 #include <algorithm>
 #include <iostream>
 #include <list>
+#include <utility>
+
 #include "common_socket.h"
 #include "server_map_queues_monitor.h"
 #include "server_receiver_thread.h"
 #include "server_thread.h"
 
-class AcceptorThread : public Thread {
+class AcceptorThread: public Thread {
 private:
     Socket& listener_skt;
     std::list<ReceiverThread*> clients;
@@ -29,7 +31,7 @@ private:
     void kill_all_clients();
 
 public:
-     AcceptorThread(Socket& skt, Queue<uint8_t>& clients_commands_queue, MapQueues& map_queues);
+    AcceptorThread(Socket& skt, Queue<uint8_t>& clients_commands_queue, MapQueues& map_queues);
 
     /*
      *
@@ -44,7 +46,7 @@ public:
     /*
      *
      * */
-    //bool get_still_alive() override;
+    // bool get_still_alive() override;
 };
 
 

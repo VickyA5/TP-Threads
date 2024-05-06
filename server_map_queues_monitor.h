@@ -3,8 +3,9 @@
 #define THREADS_2024C1_VICKYA5_MAPQUEUES_H
 
 #include <map>
-#include "server_queue.h"
+
 #include "server_message.h"
+#include "server_queue.h"
 
 class MapQueues {
 private:

@@ -1,11 +1,11 @@
 
 #include "server_servidor.h"
+
 #include "server_map_queues_monitor.h"
 
-Server::Server(const char* service_name) : acceptor_skt(service_name) {
-}
+Server::Server(const char* service_name): acceptor_skt(service_name) {}
 
-int Server::run(){
+int Server::run() {
 
     MapQueues map_queues;
     Gameloop gameloop(map_queues);

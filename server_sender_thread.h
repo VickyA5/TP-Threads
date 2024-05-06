@@ -2,13 +2,13 @@
 #ifndef THREADS_2024C1_VICKYA5_SERVER_SENDER_THREAD_H
 #define THREADS_2024C1_VICKYA5_SERVER_SENDER_THREAD_H
 
-#include "server_thread.h"
-#include "server_queue.h"
+#include "server_map_queues_monitor.h"
 #include "server_message.h"
 #include "server_protocol.h"
-#include "server_map_queues_monitor.h"
+#include "server_queue.h"
+#include "server_thread.h"
 
-class SenderThread : public Thread {
+class SenderThread: public Thread {
 private:
     Socket& client_skt;
     Queue<ServerMessage> server_messages;

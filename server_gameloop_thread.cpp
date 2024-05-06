@@ -1,7 +1,7 @@
 
 #include "server_gameloop_thread.h"
 
-Gameloop::Gameloop(MapQueues& map_queues) : game(map_queues){}
+Gameloop::Gameloop(MapQueues& map_queues): game(map_queues) {}
 
 void Gameloop::run() {
     while (continue_loop) {
@@ -10,10 +10,6 @@ void Gameloop::run() {
     }
 }
 
-void Gameloop::stop() {
-    this->continue_loop = false;
-}
+void Gameloop::stop() { this->continue_loop = false; }
 
-Queue<uint8_t>& Gameloop::get_clients_commands() {
-    return game.get_clients_commands();
-}
+Queue<uint8_t>& Gameloop::get_clients_commands() { return game.get_clients_commands(); }

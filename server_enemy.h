@@ -8,12 +8,11 @@
 
 class Enemy {
 private:
-    //Necesita un monitor también?
+    // Necesita un monitor también?
     std::atomic<bool> alive{true};
     std::atomic<int> iterations{0};
 
 public:
-
     /*
      * If the enemy is already dead, returns false. If the enemy is alive, returns true and kills
      * the enemy.

@@ -1,8 +1,9 @@
 
 #include "server_protocol.h"
+
 #include <netinet/in.h>
 
-ServerProtocol::ServerProtocol(Socket& a_skt) : skt(a_skt), was_closed(false) {}
+ServerProtocol::ServerProtocol(Socket& a_skt): skt(a_skt), was_closed(false) {}
 
 uint8_t ServerProtocol::receive_msg() {
     try {
@@ -35,6 +36,4 @@ void ServerProtocol::send_status(ServerMessage message) {
     } */
 }
 
-bool ServerProtocol::get_was_closed() {
-    return was_closed;
-}
+bool ServerProtocol::get_was_closed() { return was_closed; }

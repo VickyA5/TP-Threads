@@ -1,14 +1,12 @@
 
 #include "server_game.h"
 
-Game::Game(MapQueues& map_queues) : map_queues(map_queues) {
-    this->last_type_event = 0;
-}
+Game::Game(MapQueues& map_queues): map_queues(map_queues) { this->last_type_event = 0; }
 
 // fijarme si no hay problema con tener problema con la posición de memoria si se me mueve.
 void Game::kill_enemy() {
     this->last_type_event = KILLED;
-    for (Enemy& enemy : enemies) {
+    for (Enemy& enemy: enemies) {
         bool was_killed = enemy.kill();
         if (was_killed) {
             return;
@@ -19,16 +17,16 @@ void Game::kill_enemy() {
 bool Game::revive_enemy() {
     this->last_type_event = REVIVED;
     int revived_enemies = 0;
-    for (Enemy& enemy : enemies) {
+    for (Enemy& enemy: enemies) {
         if (enemy.try_revive())
             revived_enemies++;
     }
     return (revived_enemies > 0);
 }
 
-uint16_t Game::get_alive_cnt()  {
+uint16_t Game::get_alive_cnt() {
     uint16_t alive = 0;
-    for (Enemy& enemy : enemies) {
+    for (Enemy& enemy: enemies) {
         if (enemy.is_alive())
             alive++;
     }
@@ -58,13 +56,11 @@ void Game::broadcast() {
 }
 
 void Game::print_and_broadcast() {
-    printer.print_status(last_type_event,get_alive_cnt());
+    printer.print_status(last_type_event, get_alive_cnt());
     broadcast();
 }
 
-Queue<uint8_t>& Game::get_clients_commands() {
-    return clients_commands;
-}
+Queue<uint8_t>& Game::get_clients_commands() { return clients_commands; }
 
 /*
 void Game::stop_game() {
@@ -72,5 +68,5 @@ void Game::stop_game() {
 }*/
 
 Game::~Game() {
-    //clients_commands.close();
+    // clients_commands.close();
 }

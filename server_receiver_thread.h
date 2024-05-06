@@ -2,6 +2,8 @@
 #ifndef THREADS_2024C1_VICKYA5_SERVER_RECEIVER_THREAD_H
 #define THREADS_2024C1_VICKYA5_SERVER_RECEIVER_THREAD_H
 
+#include <utility>
+
 #include "server_sender_thread.h"
 
 #define SHUTDOWN 2
@@ -17,9 +19,7 @@ private:
     SenderThread sender;
 
 public:
-    ReceiverThread(Socket skt_peer,
-                   Queue<uint8_t>& clients_commands_queue,
-                   MapQueues& map_queues,
+    ReceiverThread(Socket skt_peer, Queue<uint8_t>& clients_commands_queue, MapQueues& map_queues,
                    size_t an_id);
 
     /*
