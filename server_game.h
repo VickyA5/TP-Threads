@@ -17,7 +17,7 @@ class Game {
 private:
     std::array<Enemy, 5> enemies;
     uint8_t last_type_event;
-    MapQueues& map_queues;
+    MapQueues map_queues;
     Queue<uint8_t> clients_commands;
     StatusPrinter printer;
 
@@ -32,7 +32,7 @@ private:
     bool revive_enemy();
 
     /*
-     *
+     * Returns the amount of alive enemies.
      * */
     uint16_t get_alive_cnt();
 
@@ -47,7 +47,7 @@ private:
     void print_and_broadcast();
 
 public:
-    explicit Game(MapQueues& map_queues);
+    Game();
 
     /*
      *
@@ -59,8 +59,10 @@ public:
      * */
     Queue<uint8_t>& get_clients_commands();
 
-    // void stop_game();
-    ~Game();
+    /*
+     *
+     * */
+    MapQueues& get_map_queues();
 };
 
 

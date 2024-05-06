@@ -11,7 +11,7 @@ private:
     std::atomic<bool> continue_loop{true};
 
 public:
-    explicit Gameloop(MapQueues& map_queues);
+    Gameloop();
 
     /*
      *
@@ -29,6 +29,11 @@ public:
      *
      * */
     Queue<uint8_t>& get_clients_commands();
+
+    /*
+     *
+     * */
+    MapQueues& get_map_queues();
 };
 
 

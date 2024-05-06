@@ -1,7 +1,7 @@
 
 #include "server_game.h"
 
-Game::Game(MapQueues& map_queues): map_queues(map_queues) { this->last_type_event = 0; }
+Game::Game() { this->last_type_event = 0; }
 
 // fijarme si no hay problema con tener problema con la posición de memoria si se me mueve.
 void Game::kill_enemy() {
@@ -62,11 +62,4 @@ void Game::print_and_broadcast() {
 
 Queue<uint8_t>& Game::get_clients_commands() { return clients_commands; }
 
-/*
-void Game::stop_game() {
-    clients_commands.close();
-}*/
-
-Game::~Game() {
-    // clients_commands.close();
-}
+MapQueues& Game::get_map_queues() { return map_queues; }
