@@ -39,7 +39,7 @@ void Game::iteration() {
     try {
         uint8_t last_command = 0;
         clients_commands.try_pop(last_command);
-        if (last_command == ATTACK) {
+        if (last_command == ATTACK && (get_alive_cnt() > 0)) {
             kill_enemy();
             print_and_broadcast();
         }
