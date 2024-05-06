@@ -21,7 +21,6 @@ void Client::run() {
         }
     }
 }
-//SE TRABA AL RECIBIR DEL SERVER, OSEA EL SERVER NO L ESTA ENVIANDO
 
 void Client::translate_action(int action, bool read) {
     if (action == INVALID_ACTION) {

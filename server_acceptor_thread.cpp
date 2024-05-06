@@ -25,22 +25,18 @@ void AcceptorThread::run() {
             clients.push_back(new_thread);
             id_client++;
         }
-        //Nunca sale de éste while
-        std::cout << "Sale del while de acceptor " << std::endl;
         kill_all_clients();
     } catch (const std::exception& err) {
         //Se llega acá al cerrar listener_skt con el método kill.
         /*if (still_alive) {
             std::cerr << "Unexpected exception at acceptor: " << err.what() << "\n";
         } */
-        std::cout << "Catch del acceptor " << std::endl;
         kill_all_clients();
         still_alive = false;
     }
 }
 
 void AcceptorThread::clean_clients() {
-    std::cout << "Entra a clean clients " << std::endl;
     clients.remove_if([this](ReceiverThread* client) {
         if (client->is_dead()) {
             client->join();
@@ -52,7 +48,6 @@ void AcceptorThread::clean_clients() {
 }
 
 void AcceptorThread::kill_all_clients() {
-    std::cout << "Entra a kill all clients " << std::endl;
     for (auto& client: clients) {
         client->kill();
         client->join();
@@ -62,13 +57,13 @@ void AcceptorThread::kill_all_clients() {
 }
 
 void AcceptorThread::kill() {
-    // Por algún motivo, me tira
-    // Unexpected exception: socket shutdown failedTransport endpoint is not connected
+
     try {
         still_alive = false;
         listener_skt.shutdown(2);
         listener_skt.close();
     } catch (const std::exception& err) {
-        std::cout << "Catch de acceptor" << std::endl;
+        // Por algún motivo, me tira
+        // Unexpected exception: socket shutdown failedTransport endpoint is not connected
     }
 }

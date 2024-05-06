@@ -26,7 +26,6 @@ void ReceiverThread::run() {
     is_alive = false;
     sender.kill();
     sender.join();
-    std::cout << "Join del sender completado " << std::endl;
 }
 
 void ReceiverThread::kill() {

@@ -7,7 +7,7 @@
 #include "common_status_printer.h"
 
 #define SALIR "Salir"
-#define INVALID_ACTION -1
+#define INVALID_ACTION (-1)
 
 class Client {
 private:

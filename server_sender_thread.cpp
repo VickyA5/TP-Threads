@@ -6,20 +6,23 @@ SenderThread::SenderThread(Socket& skt, MapQueues& map_queues, size_t an_id) : c
 
 void SenderThread::run() {
     ServerProtocol protocol(client_skt);
-    while (connection_alive && keep_talking) {
-        ServerMessage message = server_messages.pop();
-        connection_alive = not protocol.get_was_closed();
-        if (connection_alive) {
-            protocol.send_status(message);
-        } else {
+        while (connection_alive && keep_talking) {
             try {
-                queues.delete_queue(id);
+                ServerMessage message = server_messages.pop();
+                connection_alive = not protocol.get_was_closed();
+                if (connection_alive) {
+                    protocol.send_status(message);
+                } else {
+                    try {
+                        queues.delete_queue(id);
+                    } catch (...) {
+                        std::cout << "Catch del while del sender" << std::endl;
+                    }
+                }
             } catch (const std::exception& err) {
+                //std::cout << "Catch del pop del sender" << err.what() << std::endl;
             }
-            //server_messages.close();
         }
-    }
-    queues.delete_queue(id);
 }
 
 Queue<ServerMessage>& SenderThread::get_server_msgs_queue() {
@@ -28,6 +31,11 @@ Queue<ServerMessage>& SenderThread::get_server_msgs_queue() {
 
 void SenderThread::kill() {
     keep_talking = false;
+    try {
+        queues.delete_queue(id);
+    } catch (...) {
+        std::cout << "Catch del kill de sender" << std::endl;
+    }
     //queues.delete_queue(id);
     //server_messages.close();
     /*const std::exception& err*/
