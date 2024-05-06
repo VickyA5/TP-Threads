@@ -17,10 +17,12 @@ uint8_t ServerProtocol::receive_msg() {
 
 void ServerProtocol::send_status(ServerMessage message) {
     uint8_t header_server = HEADER_SERVER;
-    uint16_t enemies_alive_cnt = message.get_alive_cnt();
     uint8_t last_type_event = message.get_type_event();
-    enemies_alive_cnt = ntohs(enemies_alive_cnt);
+
+    uint16_t enemies_alive_cnt = message.get_alive_cnt();
     uint16_t enemies_dead_cnt = 5 - enemies_alive_cnt;
+
+    enemies_alive_cnt = ntohs(enemies_alive_cnt);
     enemies_dead_cnt = ntohs(enemies_dead_cnt);
 
     skt.sendall(&header_server, sizeof(uint8_t), &was_closed);
