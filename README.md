@@ -8,7 +8,7 @@ A su vez, se trata de un proyecto multi-threading donde la implementación de la
 
 [Repositorio de Threads de la cátedra](https://github.com/eldipa/hands-on-threads)
 
-## Compilacion
+## Compilación
 
 Desde el root del proyecto
 
@@ -19,10 +19,10 @@ Esto generara los ejecutables.
 
 * Para ejecutar el servidor
 
-`./server <puerto>
+`./server <puerto>`
 * Para ejecutar un cliente (se permiten múltiples clientes)
 
-`./client <hostname> <servicio>
+`./client <hostname> <servicio>`
 
 ## Modelo
 
@@ -57,7 +57,7 @@ Luego, cada Sender posee una propia cola llamadas Server Messages de donde popea
 Finalmente, cabe mencionar que el gameloop nunca puede trabarse, por lo que utiliza try_push y try_pop que son acciones no bloqueantes. Es decir, si la cola está vacía try_pop devuelve false en lugar de quedarse esperando que tenga un elemento, y si la cola está llena try_push devuelve false en lugar de esperar que se libere un espacio. 
 En cambio, pop es bloqueante y se queda esperando a que haya un elemento en la cola (si estaba vacía), y push es bloqueante y se queda esperando que se libere un espacio en la cola (si estaba llena).
 
-Para 
+Para mayor legibilidad, separé el diagrama de las queues en dos partes. 
 
 ![img](/docs/clients_commands_queue.png?raw=true "img")
 
