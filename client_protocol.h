@@ -28,11 +28,7 @@ public:
 
     /*
      * Receives the server's msg according to the protocol:
-     * 0x06 <enemies alive cnt> <enemies dead cnt> <type event> donde 0x06 es un byte con el
-     * número literal 0x06, <enemies alive cnt> son 2 bytes sin signo en big endian con la cantidad
-     * de enemigos vivos, <enemies dead cnt> son 2 bytes sin signo en big endian con la cantidad de
-     * enemigos muertos y <type event> es un campo de un byte indicando el evento sucedido.
-     *
+     * 0x06 <enemies alive cnt> <enemies dead cnt> <type event>
      * Returns the number of enemies alive.
      * */
     uint16_t receive_msg(uint8_t& type_event);
