@@ -6,7 +6,6 @@
 
 #include "common_socket.h"
 #include "server_acceptor_thread.h"
-#include "server_game.h"
 #include "server_gameloop_thread.h"
 
 #define EXIT 'q'
@@ -17,6 +16,11 @@ private:
 
 public:
     explicit Server(const char* service_name);
+
+    /*
+     * Initializes the acceptor thread and the gameloop thread. When the user enters a 'q', it
+     * closes the commands queue, and stops and join the threads.
+     * */
     int run();
 };
 

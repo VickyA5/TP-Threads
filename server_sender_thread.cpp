@@ -17,14 +17,10 @@ void SenderThread::run() {
             if (connection_alive) {
                 protocol.send_status(message);
             } else {
-                try {
-                    queues.delete_queue(id);
-                } catch (...) {
-                    std::cout << "Catch del while del sender" << std::endl;
-                }
+                queues.delete_queue(id);
             }
         } catch (const std::exception& err) {
-            // std::cout << "Catch del pop del sender" << err.what() << std::endl;
+            // In case the server_messages queue is closed.
         }
     }
 }
@@ -33,12 +29,5 @@ Queue<ServerMessage>& SenderThread::get_server_msgs_queue() { return server_mess
 
 void SenderThread::kill() {
     keep_talking = false;
-    try {
-        queues.delete_queue(id);
-    } catch (...) {
-        std::cout << "Catch del kill de sender" << std::endl;
-    }
-    // queues.delete_queue(id);
-    // server_messages.close();
-    /*const std::exception& err*/
+    queues.delete_queue(id);
 }

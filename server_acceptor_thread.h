@@ -21,12 +21,12 @@ private:
     MapQueues& map_queues;
 
     /*
-     *
+     * Kills dead clients and deletes them.
      * */
-    void clean_clients();
+    void reap_dead();
 
     /*
-     *
+     * Kills all clients threads, deletes them and clears the list of clients.
      * */
     void kill_all_clients();
 
@@ -34,19 +34,18 @@ public:
     AcceptorThread(Socket& skt, Queue<uint8_t>& clients_commands_queue, MapQueues& map_queues);
 
     /*
-     *
+     * Executes a loop to accept new clients. For each new client, it creates a new ReceiverThread,
+     * starts it, and adds a reference to the client´s queue to the map_queues.
+     * The Game class has the ownership of this map_queues.
+     * It also assigns an unique id to each client.
+     * When the acceptor socket is closed, it stops the loop.
      * */
     void run() override;
 
     /*
-     *
+     * Sets the acceptor to be dead and closes the acceptor socket.
      * */
     void kill();
-
-    /*
-     *
-     * */
-    // bool get_still_alive() override;
 };
 
 

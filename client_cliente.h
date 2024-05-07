@@ -15,6 +15,10 @@ private:
     ClientProtocol protocol;
     StatusPrinter printer;
 
+    /*
+     * Translates user action to corresponding logic. Delegates communication through sockets to
+     * the protocol. It also calls the printer if necessary.
+     * */
     void translate_action(int action, bool read);
 
 public:

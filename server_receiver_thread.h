@@ -23,22 +23,23 @@ public:
                    size_t an_id);
 
     /*
-     *
+     * Executes the loop that receives the messages from a client and pushes the commands to the
+     * game´s queue. It also starts the sender thread and then joins it.
      * */
     void run() override;
 
     /*
-     *
+     * Sets keep_talking to false in order to tell the method run() to stop and closes the socket.
      * */
     void kill();
 
     /*
-     *
+     * Returns true if the thread is not executing the loop.
      * */
     bool is_dead();
 
     /*
-     *
+     * Returns a reference to the server message queue.
      * */
     Queue<ServerMessage>& get_server_msgs_queue();
 };

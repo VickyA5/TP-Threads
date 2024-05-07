@@ -10,10 +10,16 @@ private:
     uint16_t alive_cnt;
 
 public:
-    ServerMessage();
     ServerMessage(uint8_t type, uint16_t alive_cnt);
 
+    /*
+     * Returns the type event.
+     * */
     uint8_t get_type_event();
+
+    /*
+     * Returns the alive count.
+     * */
     uint16_t get_alive_cnt();
 };
 

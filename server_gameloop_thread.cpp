@@ -1,8 +1,6 @@
 
 #include "server_gameloop_thread.h"
 
-Gameloop::Gameloop(): game() {}
-
 void Gameloop::run() {
     while (continue_loop) {
         game.iteration();

@@ -12,10 +12,9 @@
 class ClientParser {
 
 public:
-    // bool keepParsing();
-
     /*
-     * Returns 0 if action is Atacar, n if action is Leer <n>, and -1 if action is invalid.
+     * Returns 0 if action is Atacar and sets read to false, returns n if action is Leer <n>
+     * and sets read to true, and returns -1 if action is invalid.
      * */
     int parsing(std::string linea, bool& read);
 };

@@ -22,7 +22,7 @@ public:
     ClientProtocol(const char* host_name, const char* service_name);
 
     /*
-     * Sends the literal number 0x03 to the server, wich means "attack".
+     * Sends the literal number '0x03' to the server, which means "attack".
      * */
     void send_msg_attack();
 
@@ -33,12 +33,12 @@ public:
      * de enemigos vivos, <enemies dead cnt> son 2 bytes sin signo en big endian con la cantidad de
      * enemigos muertos y <type event> es un campo de un byte indicando el evento sucedido.
      *
-     * Returns the number of alive enemies.
+     * Returns the number of enemies alive.
      * */
-    int receive_msg(uint8_t& type_event);
+    uint16_t receive_msg(uint8_t& type_event);
 
     /*
-     *
+     * Closes the connection with the client's socket.
      * */
     void close_connection();
 };

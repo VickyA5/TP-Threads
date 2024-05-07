@@ -3,7 +3,6 @@
 
 Game::Game() { this->last_type_event = 0; }
 
-// fijarme si no hay problema con tener problema con la posición de memoria si se me mueve.
 void Game::kill_enemy() {
     this->last_type_event = KILLED;
     for (Enemy& enemy: enemies) {
@@ -46,7 +45,7 @@ void Game::iteration() {
             print_and_broadcast();
         }
     } catch (const std::exception& err) {
-        std::cout << "Lo que pasa en game es que: " << err.what() << "\n";
+        // In case the queue is closed.
     }
 }
 

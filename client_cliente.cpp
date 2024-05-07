@@ -25,13 +25,13 @@ void Client::run() {
 
 void Client::translate_action(int action, bool read) {
     if (action == INVALID_ACTION) {
-        throw std::runtime_error("Error: an invalid action was received");
+        throw std::runtime_error("Error: an invalid action was received.");
     } else if (action == ATACAR && !read) {
         protocol.send_msg_attack();
     } else {
         uint8_t type_event = 0;
         for (int i = 0; i < action; ++i) {
-            int alive_count = protocol.receive_msg(type_event);
+            uint16_t alive_count = protocol.receive_msg(type_event);
             printer.print_status(type_event, alive_count);
         }
     }
