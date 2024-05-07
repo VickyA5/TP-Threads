@@ -9,7 +9,7 @@ void MapQueues::broadcast(uint16_t alive_cnt, uint8_t last_type_event) {
     for (auto& element: server_messages) {
         auto& queue_ptr = element.second;
         if (queue_ptr) {
-            queue_ptr->push(new_message);
+            queue_ptr->try_push(new_message);
         }
     }
 }
